@@ -1,10 +1,10 @@
 @font-face {
     font-family: Fira mono;
-    src: url(/javascripit/recursos/fonts/firamonoMedium.ttf);
+    src: url(/recursos/fonts/firamonoMedium.ttf);
 }
 @font-face {
     font-family: Firamonoregular;
-    src: url(/javascripit/recursos/fonts/firamonoRegular.ttf);
+    src: url(/recursos/fonts/firamonoRegular.ttf);
     }
 :root{
     --borda-cor: #424244;
