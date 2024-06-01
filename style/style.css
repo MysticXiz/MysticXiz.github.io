@@ -1,0 +1,417 @@
+@font-face {
+    font-family: Fira mono;
+    src: url(/javascripit/recursos/fonts/firamonoMedium.ttf);
+}
+@font-face {
+    font-family: Firamonoregular;
+    src: url(/javascripit/recursos/fonts/firamonoRegular.ttf);
+    }
+:root{
+    --borda-cor: #424244;
+    --background-padrao-cor: #151515;
+    --botao-font: Firamonoregular;
+    --botao-hover-cor: rgba(255, 255, 255, 0.1);
+    --botao-active-opacidade: 0.7;
+}
+/* Barra de rolagem */
+::-webkit-scrollbar {
+    width: 10px; 
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #555; 
+    border-radius: 6px; 
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #c0c1c7;
+    font-family: Fira Mono, sans-serif;
+}
+
+body{
+    background-color: var(--background-padrao-cor);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all ease 0.2s;
+}
+.cadastroContainer p{
+    font-size: 10px;
+}
+
+.secaoConteudo{
+    opacity: 0;
+    z-index: -10;
+    transition: all ease 0.4s;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+.transicao{
+    z-index: 1;
+    opacity: 1;
+}
+.cardSecoes{ /* Seção de cards */
+
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    background-color: transparent;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    justify-content: center;
+}
+.cardContainer{ /* Conteiner dos cards */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    scroll-behavior: smooth;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    height: 100%;
+    padding-left: 15px;
+    
+} 
+.cardContainer::-webkit-scrollbar {  /* Esconder a barra de rolagem (scroll) */
+    display: none;  
+}
+.card{ 
+    min-width: 200px; 
+    margin-right: 17px; 
+    background-color: transparent;
+    height: 160px;
+    width: 280px;
+    border-radius: 4px;
+    border: var(--borda-cor) 1px solid;
+    box-shadow: 0px 0px 15px 0px #000000;
+    position: inherit;
+    flex: 0 0 auto; 
+    overflow: hidden;
+    top: 50px;
+
+}
+.cardImagem{
+    width: 100%;
+    height: 100%;
+    transition: transform 0.2s ease;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+}
+.cardTexto{ /* Título de cada card */
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    z-index: 2;
+    pointer-events: none;
+    transition: transform ease 0.2s;
+}
+.cardLink:hover ~ .cardImagem{
+    transform: scale(1.05);
+}
+
+.cardLink{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0,0,0,0) 40%);
+    cursor: grab;
+}
+
+.popupcontainer{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    z-index: -2;
+    transition: ease-in 0.2s;
+}
+.cardPopUp{
+    display: grid;
+    position: fixed;
+    z-index: 10000000000;
+    width: 1000px;
+    height: 700px;
+    background-color: var(--background-padrao-cor);
+    position: absolute;
+    border-radius: 4px;
+    border: 1px solid var(--borda-cor);
+    overflow: hidden;
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-rows: 30px;
+    gap: 15px;
+    padding: 10px 10px 10px 10px;
+}
+
+.imgPopup{
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.2s ease;
+    object-fit: cover;
+    object-position: center;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.fecharPopup{
+    grid-row: 1 / 2;
+    grid-column: 3;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    width: 30px;
+    padding-right: 15px;
+}
+.active{
+    opacity: 1;
+    z-index: 10000000;
+}
+.tituloPopup{
+    grid-column: 2 / 3;
+    grid-row: 1;
+    margin-top: 10px;
+}
+.descricaoPopup{
+    grid-column: 2 / 3;
+}
+header{
+    width: 100%;
+    height: 75px;
+    border-bottom: 1px solid var(--borda-cor);
+    background-color: var(--background-padrao-cor);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.linkContainer{
+    display: flex;
+    justify-content: space-evenly;    
+}
+
+.headerBotao{
+    border-radius: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--borda-cor);
+    font-family: var(--botao-font), sans-serif;
+    font-size: 14px;
+    margin-left: 17px;
+    transition: all ease 0.2s;
+}
+.headerBotao:hover{
+    background-color: var(--botao-hover-cor);
+}
+.headerBotao:active{
+    opacity: var(--botao-active-opacidade);
+}
+/* Quando o botao do header estiver selecionado */
+.botaoSelecionado{
+    color: #151515;
+    background-color: #c0c1c7;
+}
+.botaoSelecionado:hover{
+    background-color: #DADBE1;
+}
+.botaoSelecionado:active{
+    opacity: var(--botao-active-opacidade);
+}
+.tituloSecao{
+    position: absolute;
+    left: 0;
+    font-size: 1.5em;
+    top: 0;
+}
+.verMais{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+.verMaisBotao{
+    border-radius: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--borda-cor);
+    font-family: var(--botao-font), sans-serif;
+    font-size: 14px;
+    background-color: transparent;
+    transition: all ease 0.2s;
+    cursor: pointer;
+}
+.verMaisBotao:hover{
+    background-color: var(--botao-hover-cor);
+}
+.verMaisBotao:active{
+    background-color: var(--botao-hover-cor);background-color: var(--botao-hover-cor);background-color: var(--botao-hover-cor);
+}
+button.prev, button.next {
+    position: absolute;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transition: all ease 0.2s;
+}
+button.prev {
+    left: -60px;
+}
+
+button.next {
+    right: -60px;
+}
+<<<<<<< HEAD
+.next:hover , .prev:hover{
+    background-color: var(--botao-hover-cor);
+}
+
+.secaoCardCompleto{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: relative;
+    height: 100%;
+    margin-left: 150px;
+    opacity: 0;
+    transition: all ease .5s;
+}
+.opacidade{
+    opacity: 1;
+}
+.cardCompleto{
+    min-width: 200px; 
+    background-color: transparent;
+    height: 280px;
+    width: 240px;
+    border-radius: 4px;
+    border: var(--borda-cor) 1px solid;
+    box-shadow: 0px 0px 15px 0px #000000;
+    position: inherit;
+    flex: 0 0 auto; 
+    overflow: hidden;
+    top: 50px;
+    
+}
+.botaoVoltar{
+    border-radius: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--borda-cor);
+    font-family: var(--botao-font), sans-serif;
+    font-size: 14px;
+    background-color: transparent;
+    transition: all ease 0.2s;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: -7px;
+    margin-bottom: 100px;
+    transform: rotate(180deg);
+    padding-bottom: 10px;    
+}
+.botaoVoltar:hover{
+    background-color: var(--botao-hover-cor);
+}
+.botao:active{
+    opacity: var(--botao-active-opacidade);
+}
+.secaoCardCompleto h1{
+    position: absolute;
+    top: 0;
+    left: 70px;
+
+}
+.arrowLeft{
+    font-size: larger;
+}
+.cadastroContainer{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    border: 1px solid var(--borda-cor);
+    padding: 50px;
+    width: 	450px;
+    height: 550px;
+    
+}
+.cadastroContainer input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--borda-cor);
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding: 20px 5px 10px 5px;
+    
+}
+.cadastroContainer button{
+    color: #151515;
+    background-color: #c0c1c7;
+    border: none;
+    transition: all ease .2s;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    margin-top: 15px;
+    
+}
+.cadastroContainer button:hover{
+    background-color: #DADBE1;
+}
+.cadastroContainer button:active{
+    opacity: var(--botao-active-opacidade);
+}
+.cadastroContainer h1{
+    position: absolute;
+    top: 70px;
+}
+.cadastroContainer label{
+    margin-top: 15px;
+    font-family: firamonoregular;
+    font-size: small
+}
+.cadastroContainer p{
+    margin-top: 15px;
+    
+}
+.cadastroContainer a:hover{
+    text-decoration: underline;
+
+}
+.botaoAltModoescuro{
+    width: 50px;
+    height: 50px;
+    background-color: aliceblue;
+}
+=======
+>>>>>>> 882a3cbf77d3af512c30fbfaa901c6a8c79b7f05
