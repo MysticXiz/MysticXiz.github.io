@@ -66,9 +66,12 @@ function criarFooter(){
     const ico1img = document.createElement('img');
     const ico2img = document.createElement('img');
     const ico3img = document.createElement('img');
-    ico1.textContent = 'ico1';
-    ico2.textContent = 'ico2';
-    ico3.textContent = 'ico3';
+    ico1img.className= 'twitter'
+    ico2img.className= 'instagram'
+    ico3img.className= 'facebook'
+    ico1img.src = localStorage.getItem('modoEscuro') === 'true' ? '../recursos/imgs/xwhite.png' : '../recursos/imgs/xblack.png';
+    ico2img.src = localStorage.getItem('modoEscuro') === 'true' ? '../recursos/imgs/instagramwhite.png' : '../recursos/imgs/instagramblack.png';
+    ico3img.src = localStorage.getItem('modoEscuro') === 'true' ? '../recursos/imgs/facebookwhite.png' : '../recursos/imgs/facebookblack.png';
 
     // Seção de info
     const secaoinfo = document.createElement('div');
@@ -113,17 +116,16 @@ criarFooter()
 
 criarHeader()
 function alternarModoEscuro() {
-  const body = document.body;
-  body.classList.toggle('light-mode');
-  
-  
-  if (body.classList.contains('light-mode')) {
-      localStorage.setItem('modoEscuro', 'false');
-      document.querySelector('.botaoImg').src = '../recursos/imgs/moon.png'
-  } else {
-      localStorage.setItem('modoEscuro', 'true');
-      document.querySelector('.botaoImg').src = '../recursos/imgs/sun.png'
-  }
+    const body = document.body;
+    body.classList.toggle('light-mode');
+
+    const modoEscuro = body.classList.contains('light-mode') ? 'false' : 'true';
+    localStorage.setItem('modoEscuro', modoEscuro);
+
+    document.querySelector('.botaoImg').src = modoEscuro === 'true' ? '../recursos/imgs/sun.png' : '../recursos/imgs/moon.png';
+    document.querySelector('.twitter').src = modoEscuro === 'true' ? '../recursos/imgs/xwhite.png' : '../recursos/imgs/xblack.png';
+    document.querySelector('.instagram').src = modoEscuro === 'true' ? '../recursos/imgs/instagramwhite.png' : '../recursos/imgs/instagramblack.png';
+    document.querySelector('.facebook').src = modoEscuro === 'true' ? '../recursos/imgs/facebookwhite.png' : '../recursos/imgs/facebookblack.png';
 }
 
 
