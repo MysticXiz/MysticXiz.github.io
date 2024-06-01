@@ -9,9 +9,10 @@ function fetchData(url, secao){
     .then(response => response.json())
     .then(dados => {
         console.log(dados);
-        for (let i = 0; i < 25; i++) { // Pode ajustar o valor para a quantidade de cards que aparecem na rolagem
-            const image = dados[i].images.lg || dados[i].displayIcon;
+        for (let i = 0; i < 25; i++) { // ajustar o valor para a quantidade de cards que aparecem na rolagem
+            const image = dados[i].images.lg || dados[i].displayIcon; //ajustar os tipos de dados que vai pegar da api
             const name = dados[i].name;
+            // uma descricao do elemento para o popup seria interessante, por exemplo: const descricao = dados[i].descricao; 
             criarCards(image, name, secao);
         }
     })
@@ -88,7 +89,7 @@ function criarCards(imgUrl, cardTitulo, cardSecao) {
     const titulo = document.createElement('p');
 
     a.className = 'cardLink';
-    a.addEventListener('click', () => criarPopup(imgUrl, cardTitulo));
+    a.addEventListener('click', () => criarPopup(imgUrl, cardTitulo)); //ajustar os parametros pra os popups receberem mais informações
 
     card.className = 'card';
 
@@ -103,7 +104,7 @@ function criarCards(imgUrl, cardTitulo, cardSecao) {
     card.appendChild(titulo);
     document.querySelector(cardSecao).querySelector('.cardContainer').appendChild(card);
 }
-function criarPopup(imgUrl, cardTitulo) {
+function criarPopup(imgUrl, cardTitulo) { //ajustar os parametros pra os popups receberem mais informações
             let popupcontainer = document.querySelector('.popupcontainer');
             if (!popupcontainer) {
                 popupcontainer = document.createElement('div');
@@ -135,7 +136,7 @@ function criarPopup(imgUrl, cardTitulo) {
             cardPopUp.appendChild(descricaoPopup);
             cardPopUp.appendChild(fecharPopup);
 
-            popupcontainer.innerHTML = ''; // Limpar conteúdo anterior
+            popupcontainer.innerHTML = ''; 
             popupcontainer.appendChild(cardPopUp);
             setTimeout(() => {
                 abrirfecharPopUp()
