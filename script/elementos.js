@@ -40,16 +40,74 @@ function criarHeader(){
         headerBotao2.classList.add('botaoSelecionado');
     } else if (paginaAtual === 'cadastro.html') {
         headerBotao3.classList.add('botaoSelecionado');
+        const footer = document.querySelector('footer');
+        footer.classList.add('footerposition')
     }
     document.querySelector('.secaoConteudo').classList.add('transicao')
     
     }, 1);
-    
-}
-function criarFooter(){
+
     
 }
 
+function criarFooter(){
+    const footer = document.createElement('footer');
+    const footerContainer = document.createElement('div');
+    footerContainer.className = 'footer-container';
+
+    // Seção de Redes Sociais
+    const socialSection = document.createElement('div');
+    socialSection.className = 'footer-section';
+
+    const socialTitle = document.createElement('h3');
+    socialTitle.textContent = 'Redes Sociais';
+
+    const socialList = document.createElement('ul');
+
+    const socialPlatforms = ['Facebook', 'Twitter', 'Instagram'];
+    socialPlatforms.forEach(platform => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = platform;
+        listItem.appendChild(link);
+        socialList.appendChild(listItem);
+    });
+
+    socialSection.appendChild(socialTitle);
+    socialSection.appendChild(socialList);
+
+    // Seção de Contato
+    const contactSection = document.createElement('div');
+    contactSection.className = 'footer-section';
+
+    const contactTitle = document.createElement('h3');
+    contactTitle.textContent = 'Contato';
+
+    const address = document.createElement('p');
+    address.textContent = 'Endereço: Rua dos bobos, 0';
+
+    const email = document.createElement('p');
+    email.textContent = 'Email: agente@hotmail.com';
+
+    const phone = document.createElement('p');
+    phone.textContent = 'Telefone: (123) 4002-8922';
+
+    contactSection.appendChild(contactTitle);
+    contactSection.appendChild(address);
+    contactSection.appendChild(email);
+    contactSection.appendChild(phone);
+
+    // Adicionar seções ao container do footer
+    footerContainer.appendChild(socialSection);
+    footerContainer.appendChild(contactSection);
+
+    // Adicionar o container do footer ao body
+    footer.appendChild(footerContainer)
+    document.body.appendChild(footer);
+    
+}
+criarFooter()    
 criarHeader()
 function alternarModoEscuro() {
   const body = document.body;
@@ -76,3 +134,8 @@ window.addEventListener('DOMContentLoaded', () => {
       
   }
 });
+
+document.querySelectorAll('.container img').forEach(function(img) {
+    img.src = '/recursos/imgs/image.png';
+});
+
