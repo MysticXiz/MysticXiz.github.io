@@ -4,15 +4,15 @@ function criarHeader(){
     linkContainer.className = 'linkContainer'
 
     const headerBotao = document.createElement('a');
-    headerBotao.href = '/javascripit/index.html'
+    headerBotao.href = '/index.html'
     headerBotao.className = 'headerBotao home'
     headerBotao.innerHTML = 'Home'
     const headerBotao2 = document.createElement('a');
-    headerBotao2.href = '/javascripit/paginas/galeria.html'
+    headerBotao2.href = '/paginas/galeria.html'
     headerBotao2.className = 'headerBotao galeria'
     headerBotao2.innerHTML = 'Galeria'
     const headerBotao3 = document.createElement('a');
-    headerBotao3.href = '/javascripit/paginas/cadastro.html'
+    headerBotao3.href = '/paginas/cadastro.html'
     headerBotao3.className = 'headerBotao cadastro'
     headerBotao3.innerHTML = 'Cadastre-se'
     const botaoAltModoescuro = document.createElement('button');
