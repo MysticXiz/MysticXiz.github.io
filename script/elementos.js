@@ -1,24 +1,28 @@
 function criarHeader(){
     const header = document.createElement('header');
     const linkContainer = document.createElement('nav');
-    linkContainer.className = 'linkContainer'
+    linkContainer.className = 'linkContainer';
 
     const headerBotao = document.createElement('a');
-    headerBotao.href = '/index.html'
-    headerBotao.className = 'headerBotao home'
-    headerBotao.innerHTML = 'Home'
+    headerBotao.href = '/index.html';
+    headerBotao.className = 'headerBotao home';
+    headerBotao.innerHTML = 'Home';
     const headerBotao2 = document.createElement('a');
-    headerBotao2.href = '/paginas/galeria.html'
-    headerBotao2.className = 'headerBotao galeria'
-    headerBotao2.innerHTML = 'Galeria'
+    headerBotao2.href = '/paginas/galeria.html';
+    headerBotao2.className = 'headerBotao galeria';
+    headerBotao2.innerHTML = 'Galeria';
     const headerBotao3 = document.createElement('a');
-    headerBotao3.href = '/paginas/cadastro.html'
-    headerBotao3.className = 'headerBotao cadastro'
-    headerBotao3.innerHTML = 'Cadastre-se'
+    headerBotao3.href = '/paginas/cadastro.html';
+    headerBotao3.className = 'headerBotao cadastro';
+    headerBotao3.innerHTML = 'Cadastre-se';
     const botaoAltModoescuro = document.createElement('button');
-    botaoAltModoescuro.className = 'botaoAltModoescuro'
-    botaoAltModoescuro.innerHTML = 'Modo escuro'
-    botaoAltModoescuro,addEventListener('click', ()=> alternarModoEscuro())
+    botaoAltModoescuro.className = 'botaoAltModoescuro';
+    
+    botaoAltModoescuro.addEventListener('click', ()=> alternarModoEscuro());
+    const botaoImg = document.createElement('img');
+    botaoImg.className = 'botaoImg'
+    botaoAltModoescuro.appendChild(botaoImg);
+    botaoImg.src = localStorage.getItem('modoEscuro') === 'true' ? '../recursos/imgs/sun.png' : '../recursos/imgs/moon.png';
 
 
     linkContainer.appendChild(headerBotao);
@@ -45,19 +49,30 @@ function criarHeader(){
 function criarFooter(){
     
 }
+
 criarHeader()
 function alternarModoEscuro() {
-    const elementos = document.body;
-    const modoAtual = elementos.style.getPropertyValue('--background-padrao-cor');
-    const novoModo = modoAtual === '#ffffff' ? '#151515' : '#ffffff';
+  const body = document.body;
+  body.classList.toggle('light-mode');
   
-    elementos.style.setProperty('--background-padrao-cor', novoModo);
-    localStorage.setItem('modoEscuro', novoModo === '#151515');
-  }
   
-  function carregarConfiguracoes() {
-    const modoEscuro = localStorage.getItem('modoEscuro') === 'true';
-    if (modoEscuro) {
-      alternarModoEscuro();
-    }
+  if (body.classList.contains('light-mode')) {
+      localStorage.setItem('modoEscuro', 'false');
+      document.querySelector('.botaoImg').src = '../recursos/imgs/moon.png'
+  } else {
+      localStorage.setItem('modoEscuro', 'true');
+      document.querySelector('.botaoImg').src = '../recursos/imgs/sun.png'
   }
+}
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  const modoEscuro = localStorage.getItem('modoEscuro');
+  if (modoEscuro === 'true') {
+      document.body.classList.remove('light-mode');
+      
+  } else if (modoEscuro === 'false') {
+      document.body.classList.add('light-mode');
+      
+  }
+});
