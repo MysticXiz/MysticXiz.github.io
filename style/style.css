@@ -189,7 +189,7 @@ body.light-mode {
     grid-column: 3;
     background-color: transparent;
     border: none;
-    color: white;
+    
     font-size: 30px;
     cursor: pointer;
     width: 30px;
