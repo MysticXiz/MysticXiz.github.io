@@ -19,6 +19,9 @@
     --boxshadow: 0px 0px 15px 0px #000000;
     
 }
+#loginLink{
+    color: rgb(114, 114, 220);
+}
 /* Barra de rolagem */
 ::-webkit-scrollbar {
     width: 8px; 
@@ -47,6 +50,8 @@ body{
     flex-direction: column;
     transition: all ease 0.2s;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 body.light-mode {
@@ -60,9 +65,7 @@ body.light-mode {
     
 }
 
-.cadastroContainer p{
-    font-size: 10px;
-}
+
 
 .secaoConteudo{
     opacity: 0;
@@ -72,7 +75,7 @@ body.light-mode {
     margin-right: 300px;
 }
 .transicao{
-    z-index: 1;
+    z-index: 10;
     opacity: 1;
 }
 .cardSecoes{ /* Seção de cards */
@@ -157,6 +160,7 @@ body.light-mode {
     justify-content: center;
     opacity: 0;
     z-index: -2;
+    top: 0;
     transition: ease-in 0.2s;
 }
 .cardPopUp{
@@ -315,6 +319,17 @@ button.next {
     margin-left: 150px;
     opacity: 0;
     transition: all ease .5s;
+    margin-top: 30px;
+    overflow: hidden;
+}
+.containertitulo h1{
+    font-size: 30px;
+    margin-top: 3px;
+}
+.containertitulo{
+    width: 100%;
+    display: flex;
+    gap: 20px;
 }
 .opacidade{
     opacity: 1;
@@ -330,9 +345,8 @@ button.next {
     position: inherit;
     flex: 0 0 auto; 
     overflow: hidden;
-    top: 50px;
-    
 }
+
 .botaoVoltar{
     border-radius: 8px;
     padding: 8px 16px;
@@ -342,10 +356,9 @@ button.next {
     background-color: transparent;
     transition: all ease 0.2s;
     cursor: pointer;
-    position: absolute;
+
     left: 0;
-    top: -7px;
-    margin-bottom: 100px;
+    top: 0px;
     transform: rotate(180deg);
     padding-bottom: 10px;    
 }
@@ -355,12 +368,7 @@ button.next {
 .botao:active{
     opacity: var(--botao-active-opacidade);
 }
-.secaoCardCompleto h1{
-    position: absolute;
-    top: 0;
-    left: 70px;
 
-}
 .arrowLeft{
     font-size: larger;
 }
@@ -369,16 +377,16 @@ button.next {
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 4px;
     border: 1px solid var(--borda-cor);
-    padding: 50px;
+    padding: 0px 50px 10px 50px;
     width: 	450px;
     height: 550px;
-    
+    z-index: 1000;
+    margin: 150px 0px;
+}
+.cadastroContainer p{
+    font-size: 10px;
 }
 .cadastroContainer input{
     background-color: transparent;
@@ -391,9 +399,13 @@ button.next {
     padding: 20px 5px 10px 5px;
     
 }
-input:focus { /* Firefox */
+input:focus { 
     outline: none;
   }
+.cadastro{
+    position: relative;
+    
+}
 .cadastroContainer button{
     color: var(--botao-selecionado-texto);
     background-color: var(--botao-selecionado-background);
@@ -413,8 +425,7 @@ input:focus { /* Firefox */
     opacity: var(--botao-active-opacidade);
 }
 .cadastroContainer h1{
-    position: absolute;
-    top: 70px;
+    margin-bottom: 30px;
 }
 .cadastroContainer label{
     margin-top: 15px;
@@ -451,45 +462,43 @@ input:focus { /* Firefox */
 
 footer {
     background-color: var(--background-padrao-cor);
-    padding: 20px 0;
-    text-align: justify;
+    padding: 10px 0;
     border-top: 1px solid var(--borda-cor); 
-
+    z-index: 100;
     width: 100%;
+    transition: all 0.2s;
+    margin-top: auto;
+}
+footer p, footer a{
+    font-family: Firamonoregular;
 }
 
 .footer-container {
     display: flex;
-    justify-content: space-around;
-    margin-left: 300px;
+    flex-wrap: row;
+    font-size: small;
+    
 }
 
 .footer-section {
     flex: 1;
     padding: 0 20px;
 }
-
-.footer-section h3 {
-    margin-bottom: 10px;
+.footer-section-social{
+    flex: 1;
 }
-
-.footer-section ul {
-    list-style-type: none;
-    padding: 0;
+.footer-section-social a{
+    margin: 0 15px;
 }
-
-.footer-section ul li {
-    margin-bottom: 5px;
+.footer-section-info{
+    padding: 0 20px;
 }
-
-.footer-section ul li a {
+.footer-section-info a{
     
-    text-decoration: none;
+    margin: 0 15px;
 }
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 20px;
+.footer-section-info a:hover{
+    text-decoration: underline;
 }
 .footerposition{
     position: absolute;
@@ -499,7 +508,20 @@ footer {
     width: 100%;
     height: calc(90vh - 75px);
     background-color: #646464;
+    
 }
+.containerHomepage{
+    margin: 0 100px;
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.containertituloHp{
+    grid-row: 2/3; 
+    font-size: 100px;
+}
+
 .container{
     display: grid;
     gap: 30px;
@@ -528,4 +550,7 @@ footer {
     margin: 20px 20px 0 0px;
     border-radius: 4px;
     width: 200px;
+}
+main{
+    max-width: 100%;
 }

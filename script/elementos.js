@@ -40,11 +40,8 @@ function criarHeader(){
         headerBotao2.classList.add('botaoSelecionado');
     } else if (paginaAtual === 'cadastro.html') {
         headerBotao3.classList.add('botaoSelecionado');
-        const footer = document.querySelector('footer');
-        footer.classList.add('footerposition')
     }
-    document.querySelector('.secaoConteudo').classList.add('transicao')
-    
+    document.querySelector('.secaoConteudo').classList.add('transicao');
     }, 1);
 
     
@@ -54,60 +51,66 @@ function criarFooter(){
     const footer = document.createElement('footer');
     const footerContainer = document.createElement('div');
     footerContainer.className = 'footer-container';
+    // Seção texto
+    const secaoTexto = document.createElement('div');
+    secaoTexto.className = 'footer-section';
+    const textofooter = document.createElement('p');
+    textofooter.textContent = 'Copyright @2024 PatoDevs' ;secaoTexto.appendChild(textofooter);
 
     // Seção de Redes Sociais
-    const socialSection = document.createElement('div');
-    socialSection.className = 'footer-section';
+    const secaoSocial = document.createElement('div');
+    secaoSocial.className = 'footer-section-social';
+    const ico1 = document.createElement('a');
+    const ico2 = document.createElement('a');
+    const ico3 = document.createElement('a');
+    const ico1img = document.createElement('img');
+    const ico2img = document.createElement('img');
+    const ico3img = document.createElement('img');
+    ico1.textContent = 'ico1';
+    ico2.textContent = 'ico2';
+    ico3.textContent = 'ico3';
 
-    const socialTitle = document.createElement('h3');
-    socialTitle.textContent = 'Redes Sociais';
+    // Seção de info
+    const secaoinfo = document.createElement('div');
+    secaoinfo.className = 'footer-section-info';
 
-    const socialList = document.createElement('ul');
+    const home = document.createElement('a');
+    home.textContent = 'Home';
 
-    const socialPlatforms = ['Facebook', 'Twitter', 'Instagram'];
-    socialPlatforms.forEach(platform => {
-        const listItem = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = '#';
-        link.textContent = platform;
-        listItem.appendChild(link);
-        socialList.appendChild(listItem);
-    });
+    const sobre = document.createElement('a');
+    sobre.textContent = 'Sobre';
 
-    socialSection.appendChild(socialTitle);
-    socialSection.appendChild(socialList);
+    const contato = document.createElement('a');
+    contato.textContent = 'Contato';
+    home.href = '#'
+    sobre.href = '#'
+    contato.href = '#'
 
-    // Seção de Contato
-    const contactSection = document.createElement('div');
-    contactSection.className = 'footer-section';
+    ico1.appendChild(ico1img);
+    ico2.appendChild(ico2img);
+    ico3.appendChild(ico3img);
 
-    const contactTitle = document.createElement('h3');
-    contactTitle.textContent = 'Contato';
+    secaoSocial.appendChild(ico1);
+    secaoSocial.appendChild(ico2);
+    secaoSocial.appendChild(ico3);
 
-    const address = document.createElement('p');
-    address.textContent = 'Endereço: Rua dos bobos, 0';
-
-    const email = document.createElement('p');
-    email.textContent = 'Email: agente@hotmail.com';
-
-    const phone = document.createElement('p');
-    phone.textContent = 'Telefone: (123) 4002-8922';
-
-    contactSection.appendChild(contactTitle);
-    contactSection.appendChild(address);
-    contactSection.appendChild(email);
-    contactSection.appendChild(phone);
+    secaoinfo.appendChild(home);
+    secaoinfo.appendChild(sobre);
+    secaoinfo.appendChild(contato);
 
     // Adicionar seções ao container do footer
-    footerContainer.appendChild(socialSection);
-    footerContainer.appendChild(contactSection);
+    footerContainer.appendChild(secaoTexto);
+    footerContainer.appendChild(secaoSocial);
+    footerContainer.appendChild(secaoinfo);
+    
 
     // Adicionar o container do footer ao body
     footer.appendChild(footerContainer)
     document.body.appendChild(footer);
     
 }
-criarFooter()    
+criarFooter()
+
 criarHeader()
 function alternarModoEscuro() {
   const body = document.body;
