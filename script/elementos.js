@@ -41,8 +41,8 @@ function criarHeader(){
     } else if (paginaAtual === 'cadastro.html') {
         headerBotao3.classList.add('botaoSelecionado');
     }
-    document.querySelector('.secaoConteudo').classList.add('transicao');
-    }, 1);
+    
+    }, 10);
 
     
 }
@@ -113,8 +113,8 @@ function criarFooter(){
     
 }
 criarFooter()
-
 criarHeader()
+
 function alternarModoEscuro() {
     const body = document.body;
     body.classList.toggle('light-mode');
@@ -144,3 +144,7 @@ document.querySelectorAll('.container img').forEach(function(img) {
     img.src = '/recursos/imgs/image.png';
 });
 
+setTimeout(() => {
+    document.querySelector('main').classList.add('opacidade');
+    document.querySelector('footer').classList.add('opacidade');
+}, 2);

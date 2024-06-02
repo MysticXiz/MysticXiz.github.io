@@ -1,157 +1,128 @@
 const apiConfig = [
-    { url: 'https://akabab.github.io/superhero-api/api/all.json', secao: '.exemplo1', titulo: 'Exemplo1'},
-    { url: 'https://valorant-api.com/v1/weapons?language=pt-BR', secao: '.exemplo2',  titulo: 'Exemplo2'},
-    { url: 'https://valorant-api.com/v1/maps?language=pt-BR', secao: '.exemplo3', titulo: 'Exemplo3'},
-    { url: 'https://valorant-api.com/v1/competitivetiers?language=pt-BR', secao: '.exemplo4', titulo: 'Exemplo4'}
+    { url: 'https://rickandmortyapi.com/api/character', titulo: 'Rick and Morty Characters' }
 ];
-function fetchData(url, secao){
-    fetch(url)
-    .then(response => response.json())
-    .then(dados => {
-        console.log(dados);
-        for (let i = 0; i < 25; i++) { // ajustar o valor para a quantidade de cards que aparecem na rolagem
-            const image = dados[i].images.lg || dados[i].displayIcon; //ajustar os tipos de dados que vai pegar da api
-            const name = dados[i].name;
-            // uma descricao do elemento para o popup seria interessante, por exemplo: const descricao = dados[i].descricao; 
-            criarCards(image, name, secao);
-        }
-    })
-    .catch(error => {
-        console.error(`Error fetching data from ${url}:`, error);
-    });
-};
+
+let paginaAtual = 1;
+// Fetch data from API and create cards
+function fetchData(page = 1) {
+apiConfig.forEach(config => {
+    fetch(`${config.url}?page=${page}`)
+        .then(response => response.json())
+        .then(dados => {
+            const results = dados.results;
+            document.querySelector('.secaoCardCompleto').innerHTML = ''
+            results.forEach(element => {
+                criarCards(element.image, element.name, element.status, element.species, element.gender, element.origin.name, element.location.name);
+            });
+            atualizarPagInfo(dados.info.pages);
+        })
+        .catch(error => {
+            console.error(`Erro obtendo dados de '${config.url}':`, error);
+        });
+        
+});
+}
+function atualizarPagInfo(paginasTotais) {
+    document.getElementById('pagInfo').textContent = `Página ${paginaAtual} de ${paginasTotais}`;
+    if(paginaAtual > 1){
+        document.getElementById('pagAnterior').classList.add('opacidade');
+    }else{
+         document.getElementById('pagAnterior').classList.remove('opacidade');
+    }
+    if(paginaAtual === 42){
+        document.getElementById('proximaPag').classList.remove('opacidade');
+    }else{
+         document.getElementById('proximaPag').classList.add('opacidade');
+    }
+}
 
 
-apiConfig.forEach(item => {
-    criarSecoesCards(item.secao, item.titulo, item.url),
-    fetchData(item.url, item.secao)
+document.getElementById('pagAnterior').addEventListener('click', () => {
+    if (paginaAtual > 1) {
+        paginaAtual--;
+        fetchData(paginaAtual);
+    }
 });
 
-function criarSecoesCards(secao, titulo, urlSecao){
-
-    const secaoConteudo = document.querySelector('.secaoConteudo');
-    const cardSecoes = document.createElement('section');
-    cardSecoes.className = `cardSecoes ${secao.substring(1)}`;
-    secaoConteudo.appendChild(cardSecoes);
-
-    const tituloSecao = document.createElement('div');
-    tituloSecao.className = 'tituloSecao';
-    cardSecoes.appendChild(tituloSecao);
-
-    const p = document.createElement('p');
-    p.innerHTML = titulo;
-    tituloSecao.appendChild(p);
-    
-    const verMais = document.createElement('div');
-    verMais.className = 'verMais';
-    
-    cardSecoes.appendChild(verMais);
-
-    const verMaisBotao = document.createElement('a');
-    verMaisBotao.className = 'verMaisBotao';
-    verMaisBotao.innerHTML = 'Ver mais &#10140;';
-    verMaisBotao.addEventListener('click', ()=> verMaisfunc(urlSecao, titulo))
-    
-    verMais.appendChild(verMaisBotao);
-
-    const botaoPrev = document.createElement('button');
-    botaoPrev.className = 'prev';
-    botaoPrev.innerHTML = '&#10094;';
-    botaoPrev.addEventListener('click', ()=> moveCarousel(secao, -1));
-    cardSecoes.appendChild(botaoPrev);
-
-    const botaoNext = document.createElement('button');
-    botaoNext.className = 'next';
-    botaoNext.innerHTML = '&#10095;';
-    botaoNext.addEventListener('click', () => moveCarousel(secao, 1));
-    cardSecoes.appendChild(botaoNext);
-
-    const cardContainer = document.createElement('div');
-    cardContainer.className = 'cardContainer';
-    cardSecoes.appendChild(cardContainer);
+document.getElementById('proximaPag').addEventListener('click', () => { if(paginaAtual < 42){
+    paginaAtual++;
+    fetchData(paginaAtual);
 }
-function criarCards(imgUrl, cardTitulo, cardSecao) {
-    const cardSecaoElement = document.querySelector(cardSecao);
-    if (!cardSecaoElement) {
-        console.error(`Elemento ${cardSecao} não encontrado.`);
-        return;
-    }
+});
+fetchData();
 
-    const cardContainer = cardSecaoElement.querySelector('.cardContainer');
-    if (!cardContainer) {
-        console.error(`Elemento .cardContainer não encontrado em ${cardSecao}.`);
-        return;
-    }
 
-    const a = document.createElement('a');
+
+function criarCards(imgUrl, cardTitulo, cardstatus, cardEspecie, cardGenero, cardOrigem, cardLocal) {
     const card = document.createElement('div');
     const cardImg = document.createElement('img');
     const titulo = document.createElement('p');
+    const cardTituloContainer = document.createElement('div');
 
-    a.className = 'cardLink';
-    a.addEventListener('click', () => criarPopup(imgUrl, cardTitulo)); //ajustar os parametros pra os popups receberem mais informações
-
-    card.className = 'card';
-
+    cardImg.addEventListener('click', (event) => {
+        event.preventDefault();
+        criarPopup(imgUrl, cardTitulo, cardstatus, cardEspecie, cardGenero, cardOrigem, cardLocal);
+    });
+    cardTituloContainer.className = 'cardTituloContainer'
+    
+    card.className = 'cardCompleto';
     cardImg.className = 'cardImagem';
     cardImg.src = imgUrl;
 
-    titulo.className = 'cardTexto';
-    titulo.innerHTML = cardTitulo;
+    titulo.className = 'cardTitulo';
+    titulo.textContent = cardTitulo;
 
-    card.appendChild(a);
+    cardTituloContainer.appendChild(titulo);
+    card.appendChild(cardTituloContainer);
     card.appendChild(cardImg);
-    card.appendChild(titulo);
-    document.querySelector(cardSecao).querySelector('.cardContainer').appendChild(card);
+
+    document.querySelector('.secaoCardCompleto').appendChild(card);
 }
-function criarPopup(imgUrl, cardTitulo) { //ajustar os parametros pra os popups receberem mais informações
-            let popupcontainer = document.querySelector('.popupcontainer');
-            if (!popupcontainer) {
-                popupcontainer = document.createElement('div');
-                popupcontainer.className = 'popupcontainer';
-                document.body.appendChild(popupcontainer);
-            }
-            const cardPopUp = document.createElement('div');
-            cardPopUp.className = 'cardPopUp';
 
-            const imgPopup = document.createElement('img');
-            imgPopup.className = 'imgPopup';
-            imgPopup.src = imgUrl;
+function criarPopup(imgUrl, cardTitulo, cardstatus, cardEspecie, cardGenero, cardOrigem, cardLocal) {
+    let popupcontainer = document.querySelector('.popupcontainer');
+    if (!popupcontainer) {
+        popupcontainer = document.createElement('div');
+        popupcontainer.className = 'popupcontainer';
+        document.body.appendChild(popupcontainer);
+    }
 
-            const tituloPopup = document.createElement('h1');
-            tituloPopup.className = 'tituloPopup';
-            tituloPopup.innerHTML = cardTitulo;
+    const cardPopUp = document.createElement('div');
+    cardPopUp.className = 'cardPopUp';
 
-            const descricaoPopup = document.createElement('p');
-            descricaoPopup.className = 'descricaoPopup';
-            descricaoPopup.innerHTML = '';
+    const imgPopup = document.createElement('img');
+    imgPopup.className = 'imgPopup';
+    imgPopup.src = imgUrl;
 
-            const fecharPopup = document.createElement('button');
-            fecharPopup.className = 'fecharPopup';
-            fecharPopup.innerHTML = '&#10005;';
-            fecharPopup.addEventListener('click', abrirfecharPopUp);
+    const tituloPopup = document.createElement('h1');
+    tituloPopup.className = 'tituloPopup';
+    tituloPopup.textContent = cardTitulo;
 
-            cardPopUp.appendChild(imgPopup);
-            cardPopUp.appendChild(tituloPopup);
-            cardPopUp.appendChild(descricaoPopup);
-            cardPopUp.appendChild(fecharPopup);
 
-            popupcontainer.innerHTML = ''; 
-            popupcontainer.appendChild(cardPopUp);
-            setTimeout(() => {
-                abrirfecharPopUp()
-            }, 1);
-        }
-function abrirfecharPopUp(){
+    const descricaoPopup = document.createElement('p');
+    descricaoPopup.className = 'descricaoPopup';
+
+    descricaoPopup.innerHTML = `Status: ${cardstatus}<br>Species: ${cardEspecie}<br>Gender: ${cardGenero}<br>Origin: ${cardOrigem}<br>Local: ${cardLocal}`;
+
+    const fecharPopup = document.createElement('button');
+    fecharPopup.className = 'fecharPopup';
+    fecharPopup.innerHTML = '&#10005;';
+    fecharPopup.addEventListener('click', togglePopup);
+
+    cardPopUp.appendChild(imgPopup);
+    cardPopUp.appendChild(tituloPopup);
+    cardPopUp.appendChild(descricaoPopup);
+    cardPopUp.appendChild(fecharPopup);
+
+    popupcontainer.innerHTML = ''; 
+    popupcontainer.appendChild(cardPopUp);
+
+    setTimeout(() => {
+        togglePopup();
+    }, 1);
+}
+
+function togglePopup() {
     const popup = document.querySelector('.popupcontainer');
     popup.classList.toggle('active');
-}
-function moveCarousel(secao, direcao) {
-    const container = document.querySelector(`${secao} .cardContainer`);
-    const scroll = container.clientWidth / 1; // Valor da rolagem horizontal do carrossel
-    container.scrollLeft += direcao * scroll;
-}
-function verMaisfunc(urlSecao, titulo){
-    window.location.href = 'galeriacompleta.html?url=' + urlSecao + '&titulo='+ titulo;
-
 }
