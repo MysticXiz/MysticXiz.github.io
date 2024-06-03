@@ -140,9 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-document.querySelectorAll('.container img').forEach(function(img) {
-    img.src = '/recursos/imgs/image.png';
-});
+
 
 setTimeout(() => {
     document.querySelector('main').classList.add('opacidade');

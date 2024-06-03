@@ -370,7 +370,7 @@ header{
 }
 input:focus { 
     outline: none;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid rgb(114, 114, 220);
   }
 .cadastro{
     position: relative;
@@ -535,10 +535,11 @@ footer p, footer a{
 }
 .member img{
     border-radius: 4px;
-    width: 200px;
-    height: 255px;
+    width: 240px;
+    height: 315px;
     object-fit: cover;
     object-position: center;
+    border: 1px solid var(--borda-cor);
 }
 .person{
     text-align: center;
@@ -554,21 +555,23 @@ footer p, footer a{
     height: 100%;
     grid-column: 2 / 3;
     gap: 30px;
+    margin-top: 30px;
 }
 .containerInfos{
     display: flex;
     flex-direction: row;
     border-radius: 1px solid  var(--borda-cor);
     width: 100%;
-    height: 50px;
+    height: 60px;
    
 }
 
 .formatoWrapper{
-    width: 15px;
-    height: 60px;
+    width: 20px;
+    height: 100%;
     
     border-radius: 4px;
+    padding-right: 20px;
     margin-right: 15px;
     border: 1px solid var(--borda-cor);
 }
