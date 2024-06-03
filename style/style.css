@@ -540,6 +540,7 @@ footer p, footer a{
     object-fit: cover;
     object-position: center;
     border: 1px solid var(--borda-cor);
+    box-shadow: var(--boxshadow);
 }
 .person{
     text-align: center;
