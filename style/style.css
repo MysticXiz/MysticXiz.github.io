@@ -494,6 +494,7 @@ footer p, footer a{
     width: 100%;
     height: calc(90vh - 75px);
     background-color: #6464641b;
+    border-bottom: 1px solid var(--borda-cor);
     
 }
 .containerHomepage{
@@ -524,20 +525,65 @@ footer p, footer a{
 }
 .member{
     border: 1px solid var(--borda-cor);
-    padding: 20px 20px 20px 20px;
+    padding: 30px 30px 30px 30px;
     border-radius: 4px;
- 
-}
-.member p{
-    font-size: small;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 25px;
+    width: 100%;
+    
 }
 .member img{
-    float: left;
-    margin: 20px 20px 0 0px;
     border-radius: 4px;
     width: 200px;
+    height: 255px;
+    object-fit: cover;
+    object-position: center;
 }
+.person{
+    text-align: center;
+}
+.person h3{
+   font-size: 20px;
+   margin-bottom:20px; 
+}
+.wrapperInfos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    grid-column: 2 / 3;
+    gap: 30px;
+}
+.containerInfos{
+    display: flex;
+    flex-direction: row;
+    border-radius: 1px solid  var(--borda-cor);
+    width: 100%;
+    height: 50px;
+   
+}
+
+.formatoWrapper{
+    width: 15px;
+    height: 60px;
+    
+    border-radius: 4px;
+    margin-right: 15px;
+    border: 1px solid var(--borda-cor);
+}
+
+.textoInfoPessoas{
+    margin-top: 3px;
+}
+.textoInfoPessoas h1{
+    font-size: 15px;
+}
+.textoInfoPessoas p{
+    font-size: 10px;
+        font-family: var(--botao-font);
+}
+
 main{
     max-width: 100%;
     opacity: 0;
@@ -557,8 +603,9 @@ main{
     font-size: 120px;
 }
 .index{
-    margin: 20px 300px;
+    margin: 20px 280px;
 }
+
 @media (max-width: 600px) {
     
     header a{
