@@ -12,17 +12,34 @@
         <form action="" class="cadastroContainer">
             <h1>Cadastre-se</h1>
             <label for="nome">Nome</label><input id="nome" type="text" placeholder="Digite seu Nome" >
+            <p id="verificacaoCaracterN"></p>
             <label for="email">E-mail</label><input type="text"id="email" placeholder="Digite seu e-mail">
-            <label for="senha">Senha</label><input type="password" id="senha"placeholder="Digite suasenha">
+            <label for="senha">Senha</label><input type="password" id="senha"placeholder="Digite sua senha">
+            <p id="verificacaoCaracterS"></p>
             <button type="button">Cadastre-se</button>
             <p>Já tem uma conta? <a href="#"  id="loginLink">Faça login</a></p>
         </form>
 </main>
 <script src="/script/elementos.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function(){
-    document.querySelector('main').classList.add('fade');
-})
+   const senha = document.getElementById('senha');
+   const nome = document.getElementById('nome');
+   const verificacaoCaracterS = document.getElementById('verificacaoCaracterS');
+
+   senha.addEventListener('input', function(){
+        if(senha.value.length < 8 && senha.value.length > 0){
+            verificacaoCaracterS.style.display = 'block'
+            verificacaoCaracterS.style.color = 'red'
+            verificacaoCaracterS.innerHTML = 'Mínimo de 8 caracteres'
+
+        }else if(senha.value.length === 0){
+            verificacaoCaracterS.style.display = 'none'
+        }else if(senha.value.length > 8){
+            verificacaoCaracterS.style.color = 'green'
+        }
+        
+   })
+   
 </script>
 </body>
 </html>

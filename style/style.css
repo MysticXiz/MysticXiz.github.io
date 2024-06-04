@@ -410,6 +410,18 @@ input:focus {
     text-decoration: underline;
 
 }
+#verificacaoCaracterS{
+    transition: all 0.5s;
+    width: 100%;
+    margin-left: 5px;
+    height: 10px;
+}
+#verificacaoCaracterN{
+    transition: all 0.5s;
+    display: none;
+    margin-left: 5px;
+    height: 10px;
+}
 .botaoAltModoescuro{
     cursor: pointer;
     background-color: #cebfbf00;
@@ -627,16 +639,13 @@ main{
         background-color: #84848437;
     }
     .containertituloHp{
-        transform: scale(0.3);
+        transform: scale(0.5);
     }
-    .container{
-        transform: scale(0.6);
+    .container{  
         display: flex;
         flex-direction: column;
-        margin: 0;
         max-width: 100vw;
-        margin-left: 30px;
-        
+        margin: 30px;
         
     }
     .containerHomepage{
@@ -651,7 +660,7 @@ main{
         padding: 10px 20px 10px 20px;
     }
     .index{
-        margin: 0;
+        margin: 000;
     }
 
     .imgPopup{
@@ -693,19 +702,22 @@ main{
     .paginacao{
         margin: 0;
     }
+    .member img{
+        width: 180px;
     }
+    
+    }
+    
 @media (max-width: 1000px){
     .containertituloHp{
-        transform: scale(0.3);
+        transform: scale(0.5);
     }
     .container{
-        transform: scale(0.6);
+        
         display: flex;
         flex-direction: column;
-        margin: 0;
         max-width: 100vw;
-        margin-left: 30px;
-        
+        margin: 30px;
         
     }
     .containerHomepage{
@@ -760,5 +772,14 @@ main{
     }
     .paginacao{
         margin: 0;
+    }
+    .containertitulo{
+        text-align: center;
+    }
+    .containertitulo h1{
+        margin: 30px;
+    }
+    .galeriaTitulo h1{
+        transform: scale(0.7);
     }
     }
